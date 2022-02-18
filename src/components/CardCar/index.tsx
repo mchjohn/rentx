@@ -1,9 +1,10 @@
 import React from "react";
+import { RFValue } from 'react-native-responsive-fontsize';
+import { RectButtonProps } from "react-native-gesture-handler";
 
 import Energy from '../../assets/energy.svg';
 
 import * as S from './styles';
-import { RFValue } from 'react-native-responsive-fontsize';
 
 interface CarData {
   brand: string;
@@ -15,13 +16,13 @@ interface CarData {
   thumbnail: string;
 }
 
-interface CardCarProps {
+interface CardCarProps extends RectButtonProps {
   data: CarData;
 }
 
-export function CardCar({ data }: CardCarProps) {
+export function CardCar({ data, ...rest }: CardCarProps) {
   return (
-    <S.Container>
+    <S.Container {...rest}>
       <S.Details>
         <S.Title>{data.brand}</S.Title>
         <S.Description>{data.name}</S.Description>

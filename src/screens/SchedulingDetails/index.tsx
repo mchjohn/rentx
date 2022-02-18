@@ -1,5 +1,8 @@
 import React from 'react';
+import { Feather } from '@expo/vector-icons';
+import { useTheme } from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 import { Accessory, BackButton, Button, ImageSlider } from '../../components';
 
@@ -12,11 +15,12 @@ import gasolineSvg from '../../assets/gasoline.svg';
 import exchangeSvg from '../../assets/exchange.svg';
 import accelerationSvg from '../../assets/acceleration.svg';
 
-export function CarDetails() {
+export function SchedulingDetails() {
   const { navigate } = useNavigation();
+  const { colors } = useTheme();
 
   function handleConfirmRental() {
-    navigate('Scheduling');
+    navigate('SchedulingComplete');
   }
 
   return (
@@ -53,16 +57,37 @@ export function CarDetails() {
           <Accessory name='2 pessoas' icon={peopleSvg} />
         </S.Accessories>
 
-        <S.About>
-          Este é um automóvel desportivo. Surgiu do lendário
-          touro de lide indultado na praça Real Maestranza de Sevilha.
-          É um belíssimo carro para quem gosta de acelerar.
-        </S.About>
+        <S.RentalPeriod>
+          <S.CalendarIcon>
+            <Feather name='calendar' size={RFValue(24)} color={colors.shape} />
+          </S.CalendarIcon>
+
+          <S.DateInfo>
+            <S.DateTitle>de</S.DateTitle>
+            <S.DateValue>17/02/2022</S.DateValue>
+          </S.DateInfo>
+
+          <Feather name='chevron-right' size={RFValue(24)} color={colors.shape} />
+
+          <S.DateInfo>
+            <S.DateTitle>de</S.DateTitle>
+            <S.DateValue>17/02/2022</S.DateValue>
+          </S.DateInfo>
+        </S.RentalPeriod>
+
+        <S.RentalPrice>
+          <S.RentalPriceLabel>Total</S.RentalPriceLabel>
+          <S.RentalPriceDetails>
+            <S.RentalPriceQuota>R$ 580 x3 diárias</S.RentalPriceQuota>
+            <S.RentalPriceTotal>R$ 2.900</S.RentalPriceTotal>
+          </S.RentalPriceDetails>
+        </S.RentalPrice>
       </S.Content>
 
       <S.Footer>
         <Button
-          title='Escolher período do aluguel'
+          title='Alugar agora'
+          color={colors.success}
           onPress={handleConfirmRental}
         />
       </S.Footer>
